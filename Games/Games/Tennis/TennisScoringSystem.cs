@@ -1,12 +1,11 @@
 ﻿using Games.Classes;
+using Games.Enums;
 using Games.Interfaces;
 
 namespace Games.Games.Tennis
 {
     public class TennisScoringSystem : IScoringSystem
     {
-        private static readonly string[] basePointNames = { "Love", "Fifteen", "Thirty", "Forty" };
-
         public int AssignPoint()
         {
             return new Random().Next(0, 2);
@@ -39,7 +38,7 @@ namespace Games.Games.Tennis
 
         public string DisplayBaseScore(Player playerOne, Player playerTwo)
         {
-            return $"{playerOne.Name} ({basePointNames[playerOne.Points]} {playerOne.Points}) - {playerTwo.Name} ({basePointNames[playerTwo.Points]} {playerTwo.Points})";
+            return $"{playerOne.Name} ({Enum.GetName(typeof(TennisPoints), playerOne.Points)} {playerOne.Points}) - {playerTwo.Name} ({Enum.GetName(typeof(TennisPoints), playerTwo.Points)} {playerTwo.Points})";
         }
 
         public string DisplayScore(Player playerOne, Player playerTwo)
