@@ -60,8 +60,7 @@ namespace Games.Games.Tennis
 
         private int GetDifference(int playerOnePoints, int playerTwoPoints)
         {
-            return playerOnePoints > playerTwoPoints ? playerOnePoints - playerTwoPoints :
-                playerTwoPoints - playerOnePoints;
+            return Math.Abs(playerOnePoints - playerTwoPoints);
         }
     }
 }
