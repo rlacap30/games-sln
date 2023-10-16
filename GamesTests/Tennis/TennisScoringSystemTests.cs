@@ -31,7 +31,7 @@ namespace Games.Tests.Tennis
         }
 
         [Theory]
-        [InlineData(3, 2)]
+        [InlineData(3, 4)]
         [InlineData(6, 5)]
         public void IsAdvantage_Points_True(int playerOnePoints, int playerTwoPoints)
         {
@@ -43,6 +43,7 @@ namespace Games.Tests.Tennis
         [InlineData(2, 1)]
         [InlineData(6, 6)]
         [InlineData(6, 8)]
+        [InlineData(3, 2)]
         public void IsAdvantage_Points_False(int playerOnePoints, int playerTwoPoints)
         {
             bool result = tennisScoringSystem.IsAdvantage(playerOnePoints, playerTwoPoints);
