@@ -1,7 +1,9 @@
 ﻿using Games.Classes;
 using Games.Enums;
 using Games.Interfaces;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Games.Tests")]
 namespace Games.Games.Tennis
 {
     public class TennisScoringSystem : IScoringSystem
@@ -11,20 +13,20 @@ namespace Games.Games.Tennis
             return new Random().Next(0, 2);
         }
 
-        public bool IsBaseScore(int playerOnePoints, int playerTwoPoints)
+        internal bool IsBaseScore(int playerOnePoints, int playerTwoPoints)
         {
-            if (playerOnePoints < 3 && playerTwoPoints < 3)
+            if (playerOnePoints < 3 || playerTwoPoints < 3)
                 return true;
             return false;
         }
 
-        public bool IsAdvantage(int playerOnePoints, int playerTwoPoints)
+        internal bool IsAdvantage(int playerOnePoints, int playerTwoPoints)
         {
             int playersDifference = GetDifference(playerOnePoints, playerTwoPoints);
             return (playerOnePoints >= 3 && playerTwoPoints >= 3) && playersDifference == 1;
         }
 
-        public bool IsDeuce(int playerOnePoints, int playerTwoPoints)
+        internal bool IsDeuce(int playerOnePoints, int playerTwoPoints)
         {
             int playersDifference = GetDifference(playerOnePoints, playerTwoPoints);
             return (playerOnePoints >= 3 && playerTwoPoints >= 3) && playersDifference == 0;
@@ -46,6 +48,19 @@ namespace Games.Games.Tennis
             Player winner = GetWinner(playerOne, playerTwo); 
             Player loser = GetLoser(playerOne, playerTwo);  
             return $"{winner.Name} ({winner.Points} points) - {loser.Name} ({loser.Points} points)";
+        }
+
+        public string GetScoreStatus(Player playerOne, Player playerTwo)
+        {
+            string scoreStatus = string.Empty;
+            if (IsBaseScore(playerOne.Points, playerTwo.Points))
+                scoreStatus = DisplayBaseScore(playerOne, playerTwo);
+            else if (IsDeuce(playerOne.Points, playerTwo.Points))
+                scoreStatus = $"DEUCE {playerOne.Name} ({playerOne.Points} points) and {playerTwo.Name} ({playerTwo.Points} points)";
+            else if (IsAdvantage(playerOne.Points, playerTwo.Points))
+                scoreStatus = $"ADVANTAGE {DisplayScore(playerOne, playerTwo)}";
+
+            return scoreStatus;
         }
 
         private Player GetWinner(Player playerOne, Player playerTwo)

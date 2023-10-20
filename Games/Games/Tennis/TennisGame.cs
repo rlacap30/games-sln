@@ -49,24 +49,11 @@ namespace Games.Games.Tennis
                     throw new InvalidUserException($"User {currentPlayer} does not exist");
                 }
 
-                Console.WriteLine(GetScoreStatus());
+                Console.WriteLine(scoringSystem.GetScoreStatus(playerOne, playerTwo));
             }
 
             Console.WriteLine($"WINNER {scoringSystem.DisplayScore(playerOne, playerTwo)}");
 
-        }
-
-        private string GetScoreStatus()
-        {
-            string scoreStatus = string.Empty;
-            if (scoringSystem.IsBaseScore(playerOne.Points, playerTwo.Points))
-                scoreStatus = scoringSystem.DisplayBaseScore(playerOne, playerTwo);
-            else if (scoringSystem.IsDeuce(playerOne.Points, playerTwo.Points))
-                scoreStatus = $"DEUCE {playerOne.Name} ({playerOne.Points} points) and {playerTwo.Name} ({playerTwo.Points} points)";
-            else if (scoringSystem.IsAdvantage(playerOne.Points, playerTwo.Points))
-                scoreStatus = $"ADVANTAGE {scoringSystem.DisplayScore(playerOne, playerTwo)}";
-
-            return scoreStatus;
         }
     }
 }
