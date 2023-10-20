@@ -25,7 +25,6 @@ namespace Games.Games.Tennis
             Console.WriteLine($"Game Started, {currentPlayer} will start the game");
             playerOne.SetPlayerPoints(0);
             playerTwo.SetPlayerPoints(0);
-            scoringSystem.DisplayBaseScore(playerOne, playerTwo);
         }
 
         public void PlayGame()
@@ -52,8 +51,7 @@ namespace Games.Games.Tennis
                 Console.WriteLine(scoringSystem.GetScoreStatus(playerOne, playerTwo));
             }
 
-            Console.WriteLine($"WINNER {scoringSystem.DisplayScore(playerOne, playerTwo)}");
-
+            //Console.WriteLine(scoringSystem.GetScoreStatus(playerOne, playerTwo));
         }
     }
 }

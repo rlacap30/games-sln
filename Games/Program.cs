@@ -6,8 +6,8 @@ string selectedGame = "tennis";
 
 try
 {
-    Player playerOne = new Player("Test");
-    Player playerTwo = new Player("Test_Two");
+    Player playerOne = new Player("Player A");
+    Player playerTwo = new Player("Player B");
     
     GameCreatorManager gameCreator = new GameCreatorManager(selectedGame, playerOne, playerTwo);
     var game = gameCreator.CreateGame();
